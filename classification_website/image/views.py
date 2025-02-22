@@ -16,19 +16,22 @@ class ModelAnswer:
         self.first_percent = None
         self.second = None
         self.second_percent = None
+        self.path = None
 
     def get_class_name_percent(self):
         model = None
         if self.model_name == 'v16':
+            self.model_name = "Vgg16"
             model = Vgg16()
         else:
             model = ResNet50()
-        path = str(os.path.join(self.media, 'files', self.path_image))
-        data = model.image_classification(path=path)
+            self.model_name = "ResNet50"
+        self.path = str(os.path.join(self.media, 'files', self.path_image))
+        data = model.image_classification(path=self.path)
         self.first = list(data.keys())[0]
-        self.first_percent = list(data.values())[0]
+        self.first_percent = str(float(list(data.values())[0]) * 100)
         self.second = list(data.keys())[1]
-        self.second_percent = list(data.values())[1]
+        self.second_percent = str(float(list(data.values())[1]) * 100)
 
 def upload_image(request):
     if request.method == "POST":
@@ -36,7 +39,6 @@ def upload_image(request):
         if form.is_valid():
             form.save()
             link = str(form.cleaned_data['image'])
-            print(os.path.join(settings.MEDIA_ROOT, 'files', link))
             model = ModelAnswer(str(form.cleaned_data['image']), form.cleaned_data['model'])
             model.get_class_name_percent()
             return render(request, 'classification_asnwer.html', {'answer_classification': model})

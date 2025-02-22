@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Ответ{% endblock title %}
 {% block content %}
-{{ answer_classification.first }}
+<div class="card" style="width: 18rem;">
+  <img src="media/files/{{ answer_classification.path_image }}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">Предсказание модели {{ answer_classification.model_name }}</h5>
+    <p class="card-text">С наибольшей вероятностью ({{ answer_classification.first_percent }}) на картинке {{ answer_classification.first }}.
+    С чуть меньшей вероятностью ({{ answer_classification.second_percent }}) на картинке {{ answer_classification.second }}.
+    </p>
+  </div>
+</div>
 {% endblock content %}
