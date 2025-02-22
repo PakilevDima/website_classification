@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Ответ{% endblock title %}
 {% block content %}
-<div class="card" style="width: 18rem;">
-  <img src="media/files/{{ answer_classification.path_image }}" class="card-img-top">
+
+<div class="card position-absolute top-50 start-50 translate-middle shadow-lg p-3 mb-5 bg-body-tertiary rounded-5" style="width: 18rem;">
+
+  <img src="media/files/{{ answer_classification.path_image }}" class="card-img-top rounded-2">
   <div class="card-body">
     <h5 class="card-title">Предсказание модели {{ answer_classification.model_name }}</h5>
     <p class="card-text">С наибольшей вероятностью ({{ answer_classification.first_percent }}) на картинке {{ answer_classification.first }}.
@@ -10,4 +12,5 @@
     </p>
   </div>
 </div>
+
 {% endblock content %}
