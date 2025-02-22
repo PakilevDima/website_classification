@@ -4,7 +4,10 @@ from .forms import ResumeForm
 
 def upload_image(request):
     if request.method == "POST":
-        pass
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'classification_asnwer.html')
     else:
         form = ResumeForm
         return render(request, 'file_upload.html', {'form': form})
