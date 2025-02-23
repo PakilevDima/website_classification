@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="card position-absolute top-50 start-50 translate-middle shadow-lg p-3 mb-5 bg-body-tertiary rounded-5" style="width: 18rem;">
-
+<span class="border border-primary rounded-3">
   <img src="media/files/{{ answer_classification.path_image }}" class="card-img-top rounded-2">
   <div class="card-body">
     <h5 class="card-title">Предсказание модели {{ answer_classification.model_name }}</h5>
@@ -11,6 +11,7 @@
     С чуть меньшей вероятностью ({{ answer_classification.second_percent }}) на картинке {{ answer_classification.second }}.
     </p>
   </div>
+  </span>
 </div>
 
 {% endblock content %}
